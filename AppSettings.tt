@@ -1,0 +1,22 @@
+﻿﻿<#@ template language="C#" debug="true" hostSpecific="true" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="EnvDTE" #>
+<#@ output extension=".cs" #>
+
+// Generated on <#= DateTime.Today #>
+
+using System;
+
+namespace book
+{
+    class Program
+    {
+        static void Hello(string[] args)
+        {
+            Console.WriteLine("Hello World");
+            Console.ReadKey();
+        }
+    }
+}
+
+<#+ public string FindConfigFile () { var visualStudio = (this.Host as IServiceProvider).GetService(typeof(EnvDTE.DTE)) as EnvDTE.DTE; var project = visualStudio.Solution.FindProjectItem (this.Host.TemplateFile).ContainingProject as EnvDTE.Project; foreach (EnvDTE.ProjectItem item in project.ProjectItems) { if (item.FileNames[0].EndsWith(".config")) { return item.FileNames[0]; } } return ""; } #>
